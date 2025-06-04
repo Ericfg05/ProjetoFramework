@@ -20,7 +20,8 @@ import com.alugaaqui.aluga_aqui.repositories.CarrosRepositories;
 
 
 @RestController//ela responde por requisições
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:3000")
+// @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/carros")// criar uma rota (Endpoints)
 
 public class CarrosController {

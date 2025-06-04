@@ -1,85 +1,84 @@
--- phpMyAdmin SQL Dump
--- version 5.2.2
--- https://www.phpmyadmin.net/
---
--- Host: mysql:3306
--- Tempo de geração: 04/06/2025 às 00:52
--- Versão do servidor: 8.0.41
--- Versão do PHP: 8.2.27
+-- MySQL Workbench Forward Engineering
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+CREATE SCHEMA IF NOT EXISTS `aluga_aqui` DEFAULT CHARACTER SET utf8 ;
 
---
--- Banco de dados: `aluga_aqui`
---
 
--- --------------------------------------------------------
 
---
--- Estrutura para tabela `alugueis`
---
+CREATE SCHEMA IF NOT EXISTS `aluga_aqui` DEFAULT CHARACTER SET utf8 ;
+USE `aluga_aqui` ;
 
-CREATE TABLE `alugueis` (
-  `id_alugueis` int NOT NULL,
-  `data_inicio_alugueis` date DEFAULT NULL,
-  `data_fim_alugueis` date DEFAULT NULL,
-  `valor_total_alugueis` double DEFAULT NULL,
-  `observacoes_alugueis` varchar(45) DEFAULT NULL,
-  `endereco` varchar(45) DEFAULT NULL,
-  `carros_id_carros` bigint DEFAULT NULL,
-  `nome_cliente` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
---
--- Despejando dados para a tabela `alugueis`
---
 
-INSERT INTO `alugueis` (`id_alugueis`, `data_inicio_alugueis`, `data_fim_alugueis`, `valor_total_alugueis`, `observacoes_alugueis`, `endereco`, `carros_id_carros`, `nome_cliente`) VALUES
-(1, '2025-05-05', '2025-05-06', 1600, 'teste', 'RUA', 2, 'Eric Ferreira Gomes'),
-(6, '2025-06-12', '2025-06-22', 3620, 'sdadsadasdasdsadas', 'Rua 18 Jardim Sorriso 2', 5, 'EDMAR FERREIRA GOMES'),
-(7, '2025-06-05', '2025-06-25', 7240, 'sdadsadasdasdsadas', 'Rua 18 Jardim Sorriso 2', 5, 'EDMAR FERREIRA GOMES'),
-(8, '2025-06-11', '2025-06-29', 900, 'sdadsadasdasdsadas', 'sdadas', 6, 'eric ferreira');
+CREATE TABLE IF NOT EXISTS `aluga_aqui`.`carros` (
+  `id_carros` BIGINT NOT NULL AUTO_INCREMENT,
+  `modelo_carros` VARCHAR(45) NOT NULL,
+  `marca_carros` VARCHAR(45) NOT NULL,
+  `placa_carros` VARCHAR(45) NOT NULL,
+  `ano_carros` VARCHAR(45) NOT NULL,
+  `cor_carros` VARCHAR(45) NOT NULL,
+  `status_carros` VARCHAR(45) NOT NULL,
+   `valor_carros` DECIMAL(10,2) NOT NULL,
+  `imagens_carros` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_carros`))
+ENGINE = InnoDB;
 
---
--- Índices para tabelas despejadas
---
+INSERT INTO `carros` (`id_carros`, `modelo_carros`, `marca_carros`, `placa_carros`, `ano_carros`, `cor_carros`, `status_carros`, `valor_carros`, `imagens_carros`) VALUES
+(NULL, 'Cheiron', 'Bugatti', 'sadad63', '2025', 'azul', 'Disponivel', 1500, 'https://motorshow.com.br/wp-content/uploads/sites/2/2016/03/bugatti-chiron-2.jpg'),
+(NULL, 'Skyline GT-R R34', 'Nissan', 'xpq9081', '2003', 'Azul', 'Disponivel', 400, 'https://s2-autoesporte.glbimg.com/se9camHJ7IJIVxStZO3VX22TTfc=/0x0:960x480/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_cf9d035bf26b4646b105bd958f32089d/internal_photos/bs/2023/V/d/IwKZ56TnmCEKtBkz4vgg/skyline-2.jpg'),
+(NULL, 'Jetta GLI', 'volkswagen', 'ERIC-3625', '2025', 'Branco', 'Disponivel', 150, 'https://clickpetroleoegas.com.br/wp-content/uploads/2024/06/planetcars.jpg'),
+(NULL, 'Civic TYPE R', 'Honda', 'ZG68512', '2025', 'Preto', 'Indisponivel', 250, 'https://directimports.com.br/wp-content/uploads/2023/03/2-23.webp');
 
---
--- Índices de tabela `alugueis`
---
-ALTER TABLE `alugueis`
-  ADD PRIMARY KEY (`id_alugueis`),
-  ADD KEY `fk_alugueis_carros_idx` (`carros_id_carros`);
 
---
--- AUTO_INCREMENT para tabelas despejadas
---
+CREATE TABLE IF NOT EXISTS `aluga_aqui`. `clientes`
+(
+  `id_clientes` BIGINT NOT NULL AUTO_INCREMENT,
+  `nome_clientes` VARCHAR(45) NOT NULL,
+  `email_clientes` VARCHAR(45) NOT NULL,
+  `telefone_clientes` VARCHAR(45) NOT NULL,
+  `endereco_clientes` VARCHAR(80) NOT NULL,
+  `cpf_clientes` VARCHAR(14) NOT NULL,
+  PRIMARY KEY (`id_clientes`))
+  ENGINE = InnoDB;
 
---
--- AUTO_INCREMENT de tabela `alugueis`
---
-ALTER TABLE `alugueis`
-  MODIFY `id_alugueis` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
---
--- Restrições para tabelas despejadas
---
 
---
--- Restrições para tabelas `alugueis`
---
-ALTER TABLE `alugueis`
-  ADD CONSTRAINT `fk_alugueis_carros` FOREIGN KEY (`carros_id_carros`) REFERENCES `carros` (`id_carros`);
-COMMIT;
+INSERT INTO `aluga_aqui`.`clientes`
+(`id_clientes`, `nome_clientes`, `email_clientes`, `telefone_clientes`, `endereco_clientes`, `cpf_clientes`) VALUES
+(NULL, 'Meruel', 'meruelel15@gmail.com', '(62) 99476-2130', 'Rua Pequi, 147, Marabá, PA', '098.765.432-11');
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+CREATE TABLE IF NOT EXISTS `aluga_aqui`.`alugueis` (
+  `id_alugueis` INT NOT NULL AUTO_INCREMENT,
+  `data_inicio_alugueis` DATE NOT NULL,
+  `data_fim_alugueis` DATE NOT NULL,
+  `valor_total_alugueis` DECIMAL(10,2) NOT NULL,
+  `observacoes_alugueis` VARCHAR(45) NULL,
+  `carros_id_carros` BIGINT NOT NULL,
+  `clientes_id_clientes` BIGINT NOT NULL,
+  PRIMARY KEY (`id_alugueis`),
+  INDEX `fk_alugueis_carros_idx` (`carros_id_carros` ASC) VISIBLE,
+  INDEX `fk_alugueis_clientes_idx` (`clientes_id_clientes` ASC) VISIBLE,
+  CONSTRAINT `fk_alugueis_carros`
+    FOREIGN KEY (`carros_id_carros`)
+    REFERENCES `aluga_aqui`.`carros` (`id_carros`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_alugueis_clientes` 
+    FOREIGN KEY (`clientes_id_clientes`)
+    REFERENCES `aluga_aqui`.`clientes` (`id_clientes`)
+    ON DELETE NO ACTION  
+    ON UPDATE NO ACTION);
+
+INSERT INTO `aluga_aqui`.`alugueis` 
+(`data_inicio_alugueis`, `data_fim_alugueis`, `valor_total_alugueis`, `observacoes_alugueis`, `carros_id_carros`, `clientes_id_clientes`) 
+VALUES 
+('2025-06-10', '2025-06-15', 7500.00, 'Primeiro aluguel do Cheiron', 1, 1);
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

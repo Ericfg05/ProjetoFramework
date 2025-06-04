@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
   mysql:
@@ -6,6 +6,7 @@ services:
     container_name: mysql_server
     restart: always
     environment:
+      MYSQL_DATABASE: aluga_aqui
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: aluga_aqui
       MYSQL_PASSWORD: 123
@@ -13,8 +14,14 @@ services:
       - "3309:3306"
     volumes:
       - mysql_data:/var/lib/mysql
+      - ./cod_banco_aluga_aqui.sql:/docker-entrypoint-initdb.d/cod_banco_aluga_aqui.sql
     networks:
       - app_net
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin:latest
@@ -29,6 +36,32 @@ services:
       - mysql
     networks:
       - app_net
+
+  backend:
+    build:
+      context: ./aluga-aqui
+      dockerfile: Dockerfile
+    container_name: spring_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - app_net
+
+  frontend:
+    build:
+      context: ./front-end
+      dockerfile: Dockerfile
+    container_name: react_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - app_net
+
 
 volumes:
   mysql_data:
