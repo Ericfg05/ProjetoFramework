@@ -93,25 +93,25 @@ const EditarCarro = ({
     <div className='overlay'>
       <div className='modal'>
         <h2 className='tituloEditar'>Editar Carro</h2>
-        <input type="text" name="modelo" placeholder="Modelo" value={formData.modelo} onChange={handleChange} />
-        <input type="text" name="marca" placeholder="Marca" value={formData.marca} onChange={handleChange} />
-        <input type="text" name="placa" placeholder="Placa" value={formData.placa} onChange={handleChange} />
-        <input type="text" name="ano" placeholder="Ano" value={formData.ano} onChange={handleChange} />
-        <input type="text" name="cor" placeholder="Cor" value={formData.cor} onChange={handleChange} />
+        <input id="modelo" type="text" name="modelo" placeholder="Modelo" value={formData.modelo} onChange={handleChange} />
+        <input id="marca" type="text" name="marca" placeholder="Marca" value={formData.marca} onChange={handleChange} />
+        <input id="placa" type="text" name="placa" placeholder="Placa" value={formData.placa} onChange={handleChange} />
+        <input id="ano" type="text" name="ano" placeholder="Ano" value={formData.ano} onChange={handleChange} />
+        <input id="cor" type="text" name="cor" placeholder="Cor" value={formData.cor} onChange={handleChange} />
         <input type="number" step="0.01" name="valor" placeholder="Valor" value={formData.valor} onChange={handleChange} />
-        <select name="status" value={formData.status} onChange={handleChange}>
-        <option className="status" value="">Selecione o status</option>
-        <option value="DISPONIVEL">Disponível</option>
-        <option value="INDISPONIVEL">Indisponível</option>
-        <option value="ALUGADO">Alugado</option>
-      </select>
+        <select className="status" name="status" value={formData.status} onChange={handleChange}>
+          <option value="">Selecione o status</option>
+          <option value="DISPONIVEL">Disponível</option>
+          <option value="INDISPONIVEL">Indisponível</option>
+          <option value="ALUGADO">Alugado</option>
+        </select>
         {error && <p style={{ color: 'red' }}>{error}</p>}
         <br />
         <div className='actions'>
-        <button onClick={onClose} disabled={loading}>Fechar</button>
-        <button className='btnSalvarEditar' onClick={handleSave} disabled={loading}>
-          {loading ? 'Salvando...' : 'Salvar'}
-        </button>
+          <button className='btnCancelarEditar' onClick={onClose} disabled={loading}>Fechar</button>
+          <button className='btnSalvarEditar' onClick={handleSave} disabled={loading}>
+            {loading ? 'Salvando...' : 'Salvar'}
+          </button>
         </div>
       </div>
     </div>

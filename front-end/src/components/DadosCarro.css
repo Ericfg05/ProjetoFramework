@@ -70,10 +70,11 @@ h2.tituloEditar{
 }
 
 .modal {
-  background-color: white;
-  padding: 2rem;
-  border-radius: 1em;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1em;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .actions {

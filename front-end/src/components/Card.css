@@ -1,7 +1,9 @@
 .card{
     border: 1px solid #ddd;
     border-radius: 1.0em;
+    justify-content: space-between;
     padding: 1em;
+    padding-bottom: 0;
     margin: 1.5em;
     margin-bottom: 2em;
     width: 20em;
@@ -9,6 +11,7 @@
     text-align: left;
     flex-direction: column;
     transition: transform 0.2s ease;
+    height: 100%;
 }
 
 .card:hover{
@@ -35,8 +38,9 @@
 
 .card-bottom{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content:center;
+    margin-top: auto;
+    
 }
 
 .card .preco{
@@ -53,8 +57,22 @@
     font-weight: bold;
     border-radius: 1em;
     cursor: pointer;
+    width: 80%;
 }
 
 .card button:hover {
   background-color: #994700;
+}
+
+
+.botao.indisponivel {
+  background-color: #999; 
+  color: #eee;
+  cursor: not-allowed;
+}
+
+.botao.indisponivel:hover {
+  background-color: #999; 
+  color: #eee;
+  cursor: not-allowed;
 }
