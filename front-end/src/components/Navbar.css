@@ -1,0 +1,42 @@
+.navbar{
+    display: flex;
+    justify-content: space-between;
+    background-color: black;
+    align-items: center;
+    color: white;
+    padding: 1.5em;
+}
+
+.linha{
+    height: 0.51em;
+    width: 100%;
+    background-color:rgb(255, 102, 0);
+    
+}
+
+.logo{
+    height: 1.5em;
+    padding-left: 1em;
+}
+
+.list{
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+
+.item{
+    margin-right: 1em;
+}
+
+.item a{
+    color: white;
+    text-decoration: none;
+}
+
+.item a:hover{
+    color: rgb(255, 102, 0);
+}
+
+
+
